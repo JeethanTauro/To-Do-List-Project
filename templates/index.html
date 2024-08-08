@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Entry form -->
+<div class="container my-3">
+    <h1>Enter your To-Do</h1>
+    <form action="/" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Enter To-Do title</label>
+            <input type="text" class="form-control" name='title' id="title" aria-describedby="emailHelp" required>
+            <div id="emailHelp" class="form-text">Give a funny title !!</div>
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">To-Do description</label>
+            <input type="text" class="form-control" name="desc" id="desc" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- Data table display -->
+</div>
+<div class="container my-3">
+    <h1>My To-Dos</h1>
+    {% if alltodo|length == 0 %}
+    <div class="alert alert-warning" role="alert">
+        No Todos, add them if you have some!
+    </div>
+    {% else %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in alltodo %}
+            <tr>
+                <th scope="row">{{ loop.index }}</th>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.desc }}</td>
+                <td>{{ todo.date_created }}</td>
+                <td>
+                    <input type="checkbox" class="custom-control-input" id="customCheck1" />
+                    <label class="custom-control-label" for="customCheck1">Done</label>
+                </td>
+                <td><a href="/update/{{ todo.no }}" button type="button" class="btn btn-outline-primary btn-sm mx-0">Update</button></td>
+                <td><a href="/delete/{{ todo.no }}" button type="button" class="btn btn-outline-danger btn-sm mx-0">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

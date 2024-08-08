@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Entry form -->
+<div class="container my-3">
+    <h1>Update your To-Do</h1>
+    <form action="/update/{{ todo.no }}" method="POST">
+        <div class="mb-3">
+            <label for="title" class="form-label">Enter To-Do title</label>
+            <input type="text" class="form-control" name='title' value="{{ todo.title }}" id="title" aria-describedby="emailHelp" required>
+            <div id="emailHelp" class="form-text">Give a funny title !!</div>
+        </div>
+        <div class="mb-3">
+            <label for="desc" class="form-label">To-Do description</label>
+            <input type="text" class="form-control" name="desc" value="{{ todo.desc }}" id="desc" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+{% endblock %}
+
+           
